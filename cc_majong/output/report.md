@@ -67,6 +67,8 @@
 
 ## 五、文件清单与复现方式
 
+仓库地址：https://github.com/gxf1212/Probability_of_games/cc_majong
+
 - `data/hands.parquet`：100,000 组起手的 14 张 tile id，可在新规则下复用。
 - `output/results.parquet`：当前规则下的逐手判定结果。
 - `output/summary.json`：统计指标（概率、分布、收敛曲线）。
