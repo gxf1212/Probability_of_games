@@ -195,6 +195,10 @@ def plot_multiplicity_distribution(stats: MultiplicityStats, output_path: Path) 
     for xi, yi in zip(x, y):
         ax.text(xi, yi + 0.005, f"{yi:.2%}", ha="center", va="bottom", fontsize=14)
     ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.0f}%")
+    ymax = max(y) if y else 0.0
+    if ymax == 0.0:
+        ymax = 0.05
+    ax.set_ylim(0, ymax * 1.15)
 
     _ensure_parent(output_path)
     fig.tight_layout()
@@ -314,6 +318,10 @@ def plot_wait_line_counts(stats: WaitLineStats, output_path: Path) -> None:
     ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.1f}%")
     for x, y in zip(counts, probs):
         ax.text(x, y + 0.002, f"{y*100:.2f}%", ha="center", va="bottom", fontsize=13)
+    ymax = max(probs) if probs else 0.0
+    if ymax == 0.0:
+        ymax = 0.05
+    ax.set_ylim(0, ymax * 1.15)
 
     _ensure_parent(output_path)
     fig.tight_layout()
@@ -333,6 +341,10 @@ def plot_wait_line_subset(stats: WaitLineStats, output_path: Path) -> None:
     ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.1f}%")
     for x, y in zip(counts, probs):
         ax.text(x, y + 0.002, f"{y*100:.2f}%", ha="center", va="bottom", fontsize=13)
+    ymax = max(probs) if probs else 0.0
+    if ymax == 0.0:
+        ymax = 0.05
+    ax.set_ylim(0, ymax * 1.15)
 
     _ensure_parent(output_path)
     fig.tight_layout()
