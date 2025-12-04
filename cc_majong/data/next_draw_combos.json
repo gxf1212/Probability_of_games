@@ -1,0 +1,352 @@
+{
+  "jiu_dan+yao_dan": {
+    "hand_freq": 0.07804,
+    "pure_prob": 0.036520775253882726,
+    "lai_prob": 0.07842965666970868,
+    "emp_pure": 0.03677601230138391,
+    "emp_lai": 0.08610968733982573
+  },
+  "jiu_dan+xi_dan": {
+    "hand_freq": 0.09638,
+    "pure_prob": 0.021129101102175165,
+    "lai_prob": 0.11634755380548202,
+    "emp_pure": 0.021581240921352978,
+    "emp_lai": 0.11672546171404856
+  },
+  "jiu_dan+xuan_feng": {
+    "hand_freq": 0.05422,
+    "pure_prob": 0.013687086336005374,
+    "lai_prob": 0.13314020266724247,
+    "emp_pure": 0.016599040944300997,
+    "emp_lai": 0.14016967908520842
+  },
+  "xuan_feng+yao_dan": {
+    "hand_freq": 0.04517,
+    "pure_prob": 0.0323403366865194,
+    "lai_prob": 0.08992586272995783,
+    "emp_pure": 0.03320788133717069,
+    "emp_lai": 0.09231791011733452
+  },
+  "xi_dan+yao_dan": {
+    "hand_freq": 0.07792,
+    "pure_prob": 0.036372514649171135,
+    "lai_prob": 0.07883737333266556,
+    "emp_pure": 0.036704312114989736,
+    "emp_lai": 0.08008213552361396
+  },
+  "jiu_dan+xi_dan+yao_dan": {
+    "hand_freq": 0.03198,
+    "pure_prob": 0.0351134092954438,
+    "lai_prob": 0.15095562775515184,
+    "emp_pure": 0.031269543464665414,
+    "emp_lai": 0.15666041275797374
+  },
+  "xi_dan+xuan_feng": {
+    "hand_freq": 0.05485,
+    "pure_prob": 0.014122773862196234,
+    "lai_prob": 0.13233578643899474,
+    "emp_pure": 0.01276207839562443,
+    "emp_lai": 0.12980856882406563
+  },
+  "jiu_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.02025,
+    "pure_prob": 0.03012747164508682,
+    "lai_prob": 0.1664920204757603,
+    "emp_pure": 0.030617283950617285,
+    "emp_lai": 0.18024691358024691
+  },
+  "xi_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.02049,
+    "pure_prob": 0.029965043427886695,
+    "lai_prob": 0.16693449511361877,
+    "emp_pure": 0.030258662762323085,
+    "emp_lai": 0.16642264519277697
+  },
+  "jiu_dan+xi_dan+xuan_feng": {
+    "hand_freq": 0.02183,
+    "pure_prob": 0.008312570528362177,
+    "lai_prob": 0.21132624977188846,
+    "emp_pure": 0.009161704076958314,
+    "emp_lai": 0.21392579019697663
+  },
+  "da_dan+jiu_dan": {
+    "hand_freq": 0.0024,
+    "pure_prob": 0.025880758807588077,
+    "lai_prob": 0.05867208672086721,
+    "emp_pure": 0.0125,
+    "emp_lai": 0.06666666666666667
+  },
+  "da_dan+yao_dan": {
+    "hand_freq": 0.00183,
+    "pure_prob": 0.04011728641876583,
+    "lai_prob": 0.012395041983206718,
+    "emp_pure": 0.04371584699453552,
+    "emp_lai": 0.01639344262295082
+  },
+  "da_dan+jiu_dan+yao_dan": {
+    "hand_freq": 0.0006,
+    "pure_prob": 0.04878048780487805,
+    "lai_prob": 0.06707317073170732,
+    "emp_pure": 0.06666666666666667,
+    "emp_lai": 0.06666666666666667
+  },
+  "gang_dan+jiu_dan": {
+    "hand_freq": 0.01887,
+    "pure_prob": 0.025721560872206495,
+    "lai_prob": 0.05893124114071029,
+    "emp_pure": 0.024377318494965553,
+    "emp_lai": 0.07048224695283518
+  },
+  "gang_dan+xuan_feng": {
+    "hand_freq": 0.00831,
+    "pure_prob": 0.022394411669748468,
+    "lai_prob": 0.06573527829141107,
+    "emp_pure": 0.02286401925391095,
+    "emp_lai": 0.06257521058965103
+  },
+  "gang_dan+jiu_dan+xuan_feng": {
+    "hand_freq": 0.00253,
+    "pure_prob": 0.017770493910472702,
+    "lai_prob": 0.14091069764452585,
+    "emp_pure": 0.015810276679841896,
+    "emp_lai": 0.1422924901185771
+  },
+  "jiu_dan+xi_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00858,
+    "pure_prob": 0.03134534841851915,
+    "lai_prob": 0.22822028919589896,
+    "emp_pure": 0.03496503496503497,
+    "emp_lai": 0.22144522144522144
+  },
+  "da_dan+xuan_feng": {
+    "hand_freq": 0.00097,
+    "pure_prob": 0.02254630793730618,
+    "lai_prob": 0.06696840164277931,
+    "emp_pure": 0.061855670103092786,
+    "emp_lai": 0.10309278350515463
+  },
+  "gang_dan+xi_dan": {
+    "hand_freq": 0.01751,
+    "pure_prob": 0.02440881633259508,
+    "lai_prob": 0.06128437640744197,
+    "emp_pure": 0.018275271273557967,
+    "emp_lai": 0.04911479154768703
+  },
+  "gang_dan+yao_dan": {
+    "hand_freq": 0.01205,
+    "pure_prob": 0.03950342407988395,
+    "lai_prob": 0.017933407549843135,
+    "emp_pure": 0.03568464730290456,
+    "emp_lai": 0.017427385892116183
+  },
+  "gang_dan+xi_dan+yao_dan": {
+    "hand_freq": 0.00425,
+    "pure_prob": 0.042869440459110474,
+    "lai_prob": 0.08332855093256815,
+    "emp_pure": 0.02823529411764706,
+    "emp_lai": 0.07058823529411765
+  },
+  "gang_dan+xi_dan+xuan_feng": {
+    "hand_freq": 0.00274,
+    "pure_prob": 0.021037327161592782,
+    "lai_prob": 0.13562993294166517,
+    "emp_pure": 0.01824817518248175,
+    "emp_lai": 0.10948905109489052
+  },
+  "gang_dan+jiu_dan+xi_dan": {
+    "hand_freq": 0.00512,
+    "pure_prob": 0.023707444105691058,
+    "lai_prob": 0.12700076219512196,
+    "emp_pure": 0.01953125,
+    "emp_lai": 0.10546875
+  },
+  "da_dan+xi_dan": {
+    "hand_freq": 0.00384,
+    "pure_prob": 0.030847730352303523,
+    "lai_prob": 0.04983909214092141,
+    "emp_pure": 0.015625,
+    "emp_lai": 0.046875
+  },
+  "da_dan+gang_dan": {
+    "hand_freq": 0.00044,
+    "pure_prob": 0.016260162601626018,
+    "lai_prob": 0.0,
+    "emp_pure": 0.045454545454545456,
+    "emp_lai": 0.0
+  },
+  "da_dan+gang_dan+jiu_dan": {
+    "hand_freq": 9e-05,
+    "pure_prob": 0.03071364046973803,
+    "lai_prob": 0.06413730803974707,
+    "emp_pure": 0.0,
+    "emp_lai": 0.2222222222222222
+  },
+  "da_dan+gang_dan+xi_dan": {
+    "hand_freq": 0.00014,
+    "pure_prob": 0.03716608594657375,
+    "lai_prob": 0.052845528455284556,
+    "emp_pure": 0.0,
+    "emp_lai": 0.14285714285714285
+  },
+  "da_dan+gang_dan+yao_dan": {
+    "hand_freq": 5e-05,
+    "pure_prob": 0.04878048780487805,
+    "lai_prob": 0.00975609756097561,
+    "emp_pure": 0.0,
+    "emp_lai": 0.0
+  },
+  "da_dan+jiu_dan+xi_dan": {
+    "hand_freq": 0.00097,
+    "pure_prob": 0.03293940155896404,
+    "lai_prob": 0.11046852736568603,
+    "emp_pure": 0.041237113402061855,
+    "emp_lai": 0.12371134020618557
+  },
+  "da_dan+xi_dan+yao_dan": {
+    "hand_freq": 0.00059,
+    "pure_prob": 0.05112305360341739,
+    "lai_prob": 0.06063111478572413,
+    "emp_pure": 0.03389830508474576,
+    "emp_lai": 0.03389830508474576
+  },
+  "gang_dan+jiu_dan+yao_dan": {
+    "hand_freq": 0.00422,
+    "pure_prob": 0.04382922976149193,
+    "lai_prob": 0.08074211073864293,
+    "emp_pure": 0.037914691943127965,
+    "emp_lai": 0.0924170616113744
+  },
+  "da_dan+gang_dan+jiu_dan+xi_dan": {
+    "hand_freq": 4e-05,
+    "pure_prob": 0.016260162601626018,
+    "lai_prob": 0.15447154471544716,
+    "emp_pure": 0.0,
+    "emp_lai": 0.75
+  },
+  "da_dan+gang_dan+jiu_dan+yao_dan": {
+    "hand_freq": 1e-05,
+    "pure_prob": 0.04878048780487805,
+    "lai_prob": 0.08943089430894309,
+    "emp_pure": 0.0,
+    "emp_lai": 0.0
+  },
+  "da_dan+gang_dan+xi_dan+yao_dan": {
+    "hand_freq": 2e-05,
+    "pure_prob": 0.06504065040650407,
+    "lai_prob": 0.044715447154471545,
+    "emp_pure": 0.0,
+    "emp_lai": 0.0
+  },
+  "da_dan+jiu_dan+xi_dan+yao_dan": {
+    "hand_freq": 0.00019,
+    "pure_prob": 0.04749679075738126,
+    "lai_prob": 0.13821138211382114,
+    "emp_pure": 0.05263157894736842,
+    "emp_lai": 0.05263157894736842
+  },
+  "gang_dan+jiu_dan+xi_dan+yao_dan": {
+    "hand_freq": 0.00161,
+    "pure_prob": 0.04145836489420795,
+    "lai_prob": 0.155330000504974,
+    "emp_pure": 0.031055900621118012,
+    "emp_lai": 0.13043478260869565
+  },
+  "da_dan+gang_dan+jiu_dan+xi_dan+yao_dan": {
+    "hand_freq": 1e-05,
+    "pure_prob": 0.04878048780487805,
+    "lai_prob": 0.15447154471544716,
+    "emp_pure": 0.0,
+    "emp_lai": 0.0
+  },
+  "gang_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00192,
+    "pure_prob": 0.03713584010840108,
+    "lai_prob": 0.09921239837398374,
+    "emp_pure": 0.015625,
+    "emp_lai": 0.109375
+  },
+  "gang_dan+xi_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00091,
+    "pure_prob": 0.03493254712766908,
+    "lai_prob": 0.17689627445725006,
+    "emp_pure": 0.01098901098901099,
+    "emp_lai": 0.14285714285714285
+  },
+  "da_dan+jiu_dan+xuan_feng": {
+    "hand_freq": 0.00038,
+    "pure_prob": 0.018399657680787333,
+    "lai_prob": 0.14826700898587933,
+    "emp_pure": 0.05263157894736842,
+    "emp_lai": 0.15789473684210525
+  },
+  "da_dan+xi_dan+xuan_feng": {
+    "hand_freq": 0.00052,
+    "pure_prob": 0.028142589118198873,
+    "lai_prob": 0.1253908692933083,
+    "emp_pure": 0.038461538461538464,
+    "emp_lai": 0.15384615384615385
+  },
+  "da_dan+jiu_dan+xi_dan+xuan_feng": {
+    "hand_freq": 0.00024,
+    "pure_prob": 0.02032520325203252,
+    "lai_prob": 0.2225609756097561,
+    "emp_pure": 0.08333333333333333,
+    "emp_lai": 0.16666666666666666
+  },
+  "da_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00027,
+    "pure_prob": 0.044263775971093045,
+    "lai_prob": 0.07949412827461608,
+    "emp_pure": 0.037037037037037035,
+    "emp_lai": 0.07407407407407407
+  },
+  "da_dan+jiu_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00012,
+    "pure_prob": 0.037940379403794036,
+    "lai_prob": 0.16463414634146342,
+    "emp_pure": 0.0,
+    "emp_lai": 0.3333333333333333
+  },
+  "da_dan+xi_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.0001,
+    "pure_prob": 0.04715447154471545,
+    "lai_prob": 0.13902439024390245,
+    "emp_pure": 0.0,
+    "emp_lai": 0.2
+  },
+  "da_dan+jiu_dan+xi_dan+xuan_feng+yao_dan": {
+    "hand_freq": 4e-05,
+    "pure_prob": 0.04065040650406504,
+    "lai_prob": 0.21951219512195122,
+    "emp_pure": 0.0,
+    "emp_lai": 0.25
+  },
+  "gang_dan+jiu_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00083,
+    "pure_prob": 0.037613870114604764,
+    "lai_prob": 0.16838084043491036,
+    "emp_pure": 0.0,
+    "emp_lai": 0.20481927710843373
+  },
+  "gang_dan+jiu_dan+xi_dan+xuan_feng": {
+    "hand_freq": 0.00095,
+    "pure_prob": 0.011210954214805306,
+    "lai_prob": 0.2220795892169448,
+    "emp_pure": 0.010526315789473684,
+    "emp_lai": 0.15789473684210525
+  },
+  "gang_dan+jiu_dan+xi_dan+xuan_feng+yao_dan": {
+    "hand_freq": 0.00035,
+    "pure_prob": 0.03879210220673635,
+    "lai_prob": 0.2283391405342625,
+    "emp_pure": 0.0,
+    "emp_lai": 0.14285714285714285
+  },
+  "da_dan+gang_dan+xuan_feng": {
+    "hand_freq": 1e-05,
+    "pure_prob": 0.04878048780487805,
+    "lai_prob": 0.032520325203252036,
+    "emp_pure": 0.0,
+    "emp_lai": 1.0
+  }
+}

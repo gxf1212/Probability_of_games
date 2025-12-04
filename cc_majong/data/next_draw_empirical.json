@@ -1,0 +1,35 @@
+{
+  "per_egg": {
+    "xuan_feng": {
+      "pure": 0.00203,
+      "lai": 0.01232,
+      "total": 0.01435
+    },
+    "xi_dan": {
+      "pure": 0.00491,
+      "lai": 0.01802,
+      "total": 0.02293
+    },
+    "yao_dan": {
+      "pure": 0.00676,
+      "lai": 0.00504,
+      "total": 0.0118
+    },
+    "jiu_dan": {
+      "pure": 0.005,
+      "lai": 0.01898,
+      "total": 0.02398
+    },
+    "da_dan": {
+      "pure": 0.00013,
+      "lai": 0.0,
+      "total": 0.00013
+    },
+    "gang_dan": {
+      "pure": 0.0006,
+      "lai": 0.0,
+      "total": 0.0006
+    }
+  },
+  "union_prob": 0.06524
+}
