@@ -209,9 +209,10 @@ def plot_type_count_curves(stats: MultiplicityStats, output_path: Path) -> None:
         [[stats.per_type_distribution[egg.key].get(count, 0.0) for count in counts] for egg in EGG_TYPES]
     )
 
-    fig, ax = plt.subplots(figsize=(9, 5), dpi=FIGURE_DPI)
+    fig, ax = plt.subplots(figsize=(12, 6), dpi=FIGURE_DPI)
     cmap = plt.cm.Blues
     im = ax.imshow(data, cmap=cmap)
+    ax.set_aspect('auto')
 
     ax.set_xticks(np.arange(len(counts)))
     ax.set_xticklabels(counts)
@@ -231,10 +232,12 @@ def plot_type_count_curves(stats: MultiplicityStats, output_path: Path) -> None:
                 ha="center",
                 va="center",
                 color="#1f1f1f" if value < 0.5 else "white",
-                fontsize=11,
-            )
+                fontsize=15,
+    )
 
-    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label="概率")
+    cbar = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.04)
+    cbar.set_label("概率 (%)")
+    cbar.ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.0f}%")
 
     _ensure_parent(output_path)
     fig.tight_layout()
