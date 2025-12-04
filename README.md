@@ -60,9 +60,11 @@ from cc_majong.next_draw import (
     compute_empirical_draw_stats,
     compute_combo_stats,
     compute_multi_wait_stats,
+    compute_wait_line_stats,
     save_next_draw_stats,
     save_combo_stats,
     save_multi_wait_stats,
+    save_wait_line_stats,
 )
 from cc_majong.multiplicity import (
     compute_multiplicity_stats,
@@ -71,9 +73,10 @@ from cc_majong.multiplicity import (
 from cc_majong.plotting import (
     plot_next_draw_bars,
     plot_combo_waits,
-    plot_multi_wait_summary,
     plot_multiplicity_distribution,
     plot_type_count_curves,
+    plot_wait_line_counts,
+    plot_wait_line_subset,
 )
 
 base = Path('data')
@@ -90,14 +93,17 @@ combos = compute_combo_stats(samples, min_size=2)
 save_combo_stats(combos, base / 'next_draw_combos.json')
 multi_wait = compute_multi_wait_stats(samples, min_waits=2)
 save_multi_wait_stats(multi_wait, base / 'next_draw_multiwait.json')
+wait_lines = compute_wait_line_stats(samples)
+save_wait_line_stats(wait_lines, base / 'next_draw_wait_counts.json')
 mult_stats = compute_multiplicity_stats(samples)
 save_multiplicity_stats(mult_stats, base / 'egg_multiplicity.json')
 
 plot_next_draw_bars(theory, empirical, fig_dir / 'next_draw.png')
 plot_combo_waits(combos, fig_dir / 'multi_wait_combos.png', top_n=6)
-plot_multi_wait_summary(multi_wait, fig_dir / 'multi_wait_summary.png')
 plot_multiplicity_distribution(mult_stats, fig_dir / 'egg_multiplicity.png')
 plot_type_count_curves(mult_stats, fig_dir / 'egg_type_counts.png')
+plot_wait_line_counts(wait_lines, fig_dir / 'wait_line_counts.png')
+plot_wait_line_subset(wait_lines, fig_dir / 'wait_line_subset.png')
 ```
 
 ### dice

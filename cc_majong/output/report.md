@@ -72,13 +72,17 @@
 
 
 ## 五、不是庄家的“差一张”胜率
-在全部起手（含有蛋与无蛋）里，约 **51.04%** 属于“13 张尚未成蛋，但至少有一条线只差一张就能亮蛋”的状态；其余要么已经有蛋，要么至少差两张。下文所有“差一张”概率都只在这 51.04% 的手牌范围内统计。
+在全部起手（含有蛋与无蛋）里，约 **51.04% 属于“13 张尚未成蛋，但至少有一条线只差一张就能亮蛋”的状态**；其余要么已经有蛋，要么至少差两张。下文所有“差一张”概率都只在这 51.04% 的手牌范围内统计。
 
-我们基于同一批 100,000 副牌谱做了两套统计：
-- **理论法**：把 13 张起手视作当前手牌，余下 123 张未知牌等概率，统计哪些牌能一摸成蛋，相当于问“差一张的计划价值”。
-- **实测法**：直接拿样本中的第 14 张当作下一摸，只有当这张牌真实补齐蛋时才算命中，等价于问“按现在发牌顺序我能不能马上成蛋”。
+![差一张蛋线数量分布](figures/wait_line_counts.png)
 
-两种算法都会先剔除已经成蛋的手牌，只统计“差一张”的情况。这样既能给出理想化的概率、也能反映真实发牌节奏。继续沿用同一批 100,000 副牌谱，每副只取前 13 张视作“轮到我之前”的状态，再把真实的第 14 张当作下一摸。
+> 横坐标意思是：有多少种蛋型都是差一张，摸一张就可能亮蛋的。
+
+继续沿用同一批 100,000 副牌谱，每副只取前 13 张视作“轮到我之前”的状态：
+- **理论法：把 13 张起手视作当前手牌，余下 123 张未知牌等概率**，统计哪些牌能一摸成蛋，相当于问“差一张的计划价值”。
+- **实测法：直接拿样本中的第 14 张当作下一张来摸**，只有当这张牌真实补齐蛋时才算命中，等价于问“按现在发牌顺序我能不能马上成蛋”。
+
+两种算法都会先剔除已经成蛋的手牌，只统计“差一张”的情况。这样既能给出理想化的概率、也能反映真实发牌节奏。
 
 ### 1. 单线差一张：再摸一张能否开蛋？
 
@@ -100,10 +104,8 @@
 ### 2. 多线差一张：双线及以上待牌
 当起手同时差 ≥2 种蛋时，下一摸命中率直接翻倍：
 
-- **27.41%** 的 13 张起手满足“同时差两条线”且未提前亮蛋。
+- **27.41%** 的 13 张起手（约占前述 51.04% “差一张”人群的二分之一）满足“同时差两条线”且未提前亮蛋，剩余 **23.63%** 则是“只有一条线差一张”的情况。
 - 这部分手牌下一摸的理论命中率 **13.41%**，实测 **13.62%**，几乎是单线的两倍。
-
-![多线待牌占比与命中率](figures/multi_wait_summary.png)
 
 最常见的多线组合与命中率如下（赖子贡献列清楚后续调度方向）：
 
@@ -129,59 +131,27 @@
 - **纯净补牌依旧重要**：即便赖子强势，诸如“九+幺”这样的组合仍有三分之一靠纯摸完成，保留原装字牌对子依旧提高成功率。
 
 ## 六、文件清单与复现方式
+仓库地址：https://github.com/gxf1212/Probability_of_games
+
 - `cc_majong/data/hands.parquet`：10 万副 14 张牌谱。
 - `cc_majong/output/results.parquet`：逐副判定结果。
 - `cc_majong/output/summary.json`：总体概率、组合分布与收敛曲线数据。
 - `cc_majong/data/egg_multiplicity.json`：蛋数量（含重复）与各蛋型叠加统计。
 - `cc_majong/data/next_draw.json`、`cc_majong/data/next_draw_empirical.json`：单线差一张的理论 / 实测概率。
 - `cc_majong/data/next_draw_combos.json`、`cc_majong/data/next_draw_multiwait.json`：多线待牌的组合命中率及整体频率。
+- `cc_majong/data/next_draw_wait_counts.json`：差一张人群的蛋型数量分布。
 - `cc_majong/output/figures/*.png`：文中引用的全部中文图表。
 
-复现步骤：
+最简复现（需 Python 3.11+ 与 `pip`）：
 ```bash
+git clone https://github.com/gxf1212/Probability_of_games.git
+cd Probability_of_games
+python -m venv .venv && source .venv/bin/activate
+pip install -r cc_majong/requirements.txt
 PYTHONPATH=cc_majong/src python -m cc_majong.pipeline --seed 20251204
-PYTHONPATH=cc_majong/src python - <<'PY'
-from pathlib import Path
-from cc_majong.samples import load_samples
-from cc_majong.next_draw import (
-    compute_next_draw_stats,
-    compute_empirical_draw_stats,
-    compute_combo_stats,
-    compute_multi_wait_stats,
-    save_next_draw_stats,
-    save_combo_stats,
-    save_multi_wait_stats,
-)
-from cc_majong.multiplicity import compute_multiplicity_stats, save_multiplicity_stats
-from cc_majong.plotting import (
-    plot_next_draw_bars,
-    plot_combo_waits,
-    plot_multi_wait_summary,
-    plot_multiplicity_distribution,
-    plot_type_count_curves,
-)
-
-samples = load_samples(Path('cc_majong/data/hands.parquet'))
-theory = compute_next_draw_stats(samples)
-empirical = compute_empirical_draw_stats(samples)
-save_next_draw_stats(theory, Path('cc_majong/data/next_draw.json'))
-save_next_draw_stats(empirical, Path('cc_majong/data/next_draw_empirical.json'))
-combos = compute_combo_stats(samples, min_size=2)
-save_combo_stats(combos, Path('cc_majong/data/next_draw_combos.json'))
-multi_wait = compute_multi_wait_stats(samples, min_waits=2)
-save_multi_wait_stats(multi_wait, Path('cc_majong/data/next_draw_multiwait.json'))
-mult_stats = compute_multiplicity_stats(samples)
-save_multiplicity_stats(mult_stats, Path('cc_majong/data/egg_multiplicity.json'))
-
-fig_dir = Path('cc_majong/output/figures')
-fig_dir.mkdir(parents=True, exist_ok=True)
-plot_next_draw_bars(theory, empirical, fig_dir / 'next_draw.png')
-plot_combo_waits(combos, fig_dir / 'multi_wait_combos.png', top_n=6)
-plot_multi_wait_summary(multi_wait, fig_dir / 'multi_wait_summary.png')
-plot_multiplicity_distribution(mult_stats, fig_dir / 'egg_multiplicity.png')
-plot_type_count_curves(mult_stats, fig_dir / 'egg_type_counts.png')
-PY
+PYTHONPATH=cc_majong/src python -m cc_majong.refresh  # 重新计算差一张 & 绘图
 ```
+`cc_majong.pipeline` 负责抽样、判定、生成 `summary.json / results.parquet`；`cc_majong.refresh` 则一次性写出所有 `next_draw*.json`、`egg_multiplicity.json`，并刷新 `output/figures` 与 `output/report.md`。
 
 ## 七、参考资料
 - 波克游戏官网《长春麻将玩法说明》（纸牌房规整理）。

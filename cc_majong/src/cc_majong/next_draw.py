@@ -302,3 +302,79 @@ def save_multi_wait_stats(stats: MultiWaitStats, path: Path) -> None:
 
 def load_multi_wait_stats(path: Path) -> MultiWaitStats:
     return MultiWaitStats.from_dict(json.loads(path.read_text(encoding="utf-8")))
+
+
+@dataclass
+class WaitLineStats:
+    counts_all: Dict[int, int]
+    counts_subset: Dict[int, int]
+    total: int
+    subset_total: int
+
+    def to_dict(self) -> Dict[str, object]:
+        prob_all = {str(k): (self.counts_all.get(k, 0) / self.total) for k in sorted(self.counts_all)}
+        prob_subset = {
+            str(k): (self.counts_subset.get(k, 0) / self.subset_total) if self.subset_total else 0.0
+            for k in sorted(self.counts_subset)
+        }
+        return {
+            "counts_all": {str(k): v for k, v in sorted(self.counts_all.items())},
+            "prob_all": prob_all,
+            "counts_subset": {str(k): v for k, v in sorted(self.counts_subset.items())},
+            "prob_subset": prob_subset,
+            "total": self.total,
+            "subset_total": self.subset_total,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, object]) -> "WaitLineStats":
+        counts_all = {int(k): int(v) for k, v in data["counts_all"].items()}
+        counts_subset = {int(k): int(v) for k, v in data["counts_subset"].items()}
+        return cls(
+            counts_all=counts_all,
+            counts_subset=counts_subset,
+            total=int(data["total"]),
+            subset_total=int(data["subset_total"]),
+        )
+
+    def prob_all(self, k: int) -> float:
+        return self.counts_all.get(k, 0) / self.total if self.total else 0.0
+
+    def prob_subset(self, k: int) -> float:
+        return self.counts_subset.get(k, 0) / self.subset_total if self.subset_total else 0.0
+
+
+def compute_wait_line_stats(samples: HandSamples) -> WaitLineStats:
+    counts_all: Counter[int] = Counter()
+    counts_subset: Counter[int] = Counter()
+    total = samples.array.shape[0]
+    subset_total = 0
+
+    for hand in samples.array:
+        base = Counter(ID_TO_TILE[hand[:13]])
+        if any(type_feasible(base, egg, allow_laizi=True)[0] for egg in EGG_TYPES):
+            continue
+        waiting = 0
+        for egg in EGG_TYPES:
+            pure_tiles, laizi_tiles = _winning_tiles(base, egg.key)
+            if pure_tiles or laizi_tiles:
+                waiting += 1
+        counts_all[waiting] += 1
+        if waiting > 0:
+            counts_subset[waiting] += 1
+            subset_total += 1
+
+    return WaitLineStats(
+        counts_all=dict(counts_all),
+        counts_subset=dict(counts_subset),
+        total=total,
+        subset_total=subset_total,
+    )
+
+
+def save_wait_line_stats(stats: WaitLineStats, path: Path) -> None:
+    path.write_text(json.dumps(stats.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def load_wait_line_stats(path: Path) -> WaitLineStats:
+    return WaitLineStats.from_dict(json.loads(path.read_text(encoding="utf-8")))

@@ -12,7 +12,7 @@ import pandas as pd
 from .eggs import EGG_TYPES
 from .metrics import SummaryData
 from .multiplicity import MultiplicityStats
-from .next_draw import MultiWaitStats, NextDrawStats
+from .next_draw import MultiWaitStats, NextDrawStats, WaitLineStats
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 FONT_CHOICES = [
@@ -91,13 +91,13 @@ def plot_combo_distribution(summary: SummaryData, output_path: Path) -> None:
 
     fig, ax = plt.subplots(figsize=(7, 4), dpi=FIGURE_DPI)
     ax.bar(probs.index, probs.values, width=0.6, color="#4C72B0")
-    ax.set_xlabel("单手可凑蛋的数量（含赖子）")
+    ax.set_xlabel("单手可凑蛋的种类数（含赖子）")
     ax.set_ylabel("概率 (%)")
     ax.set_xticks(probs.index)
     for x, y in zip(probs.index, probs.values):
         ax.text(x, y + 0.002, f"{y:.2%}", ha="center", va="bottom", fontsize=15)
     ax.set_ylim(0, max(probs.values) * 1.15)
-    ax.set_title("蛋组合数量分布")
+    ax.set_title("蛋型种类数量分布")
     ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.0f}%")
 
     _ensure_parent(output_path)
@@ -209,7 +209,7 @@ def plot_type_count_curves(stats: MultiplicityStats, output_path: Path) -> None:
         [[stats.per_type_distribution[egg.key].get(count, 0.0) for count in counts] for egg in EGG_TYPES]
     )
 
-    fig, ax = plt.subplots(figsize=(12, 6), dpi=FIGURE_DPI)
+    fig, ax = plt.subplots(figsize=(8, 4), dpi=FIGURE_DPI)
     cmap = plt.cm.Blues
     im = ax.imshow(data, cmap=cmap)
     ax.set_aspect('auto')
@@ -295,6 +295,44 @@ def plot_multi_wait_summary(stats: MultiWaitStats, output_path: Path) -> None:
     ax.set_ylim(0, ymax * 1.2)
     for bar, val in zip(bars, values):
         ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.005, f"{val:.1%}", ha="center", va="bottom", fontsize=14)
+
+    _ensure_parent(output_path)
+    fig.tight_layout()
+    fig.savefig(output_path)
+    plt.close(fig)
+
+
+def plot_wait_line_counts(stats: WaitLineStats, output_path: Path) -> None:
+    counts = sorted(k for k in stats.counts_all.keys() if k > 0)
+    probs = [stats.prob_all(k) for k in counts]
+
+    fig, ax = plt.subplots(figsize=(8, 4.5), dpi=FIGURE_DPI)
+    ax.bar(counts, probs, color="#82b1ff")
+    ax.set_xlabel("差一张的蛋型数量")
+    ax.set_ylabel("概率 (%)")
+    ax.set_title("全部起手：差一张蛋型数量分布")
+    ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.1f}%")
+    for x, y in zip(counts, probs):
+        ax.text(x, y + 0.002, f"{y*100:.2f}%", ha="center", va="bottom", fontsize=13)
+
+    _ensure_parent(output_path)
+    fig.tight_layout()
+    fig.savefig(output_path)
+    plt.close(fig)
+
+
+def plot_wait_line_subset(stats: WaitLineStats, output_path: Path) -> None:
+    counts = sorted(k for k in stats.counts_subset.keys() if k > 0)
+    probs = [stats.prob_subset(k) for k in counts]
+
+    fig, ax = plt.subplots(figsize=(8, 4.5), dpi=FIGURE_DPI)
+    ax.bar(counts, probs, color="#4dd0e1")
+    ax.set_xlabel("差一张的蛋型数量")
+    ax.set_ylabel("占差一张人群比重 (%)")
+    ax.set_title("差一张人群：蛋型待牌数量分布")
+    ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.1f}%")
+    for x, y in zip(counts, probs):
+        ax.text(x, y + 0.002, f"{y*100:.2f}%", ha="center", va="bottom", fontsize=13)
 
     _ensure_parent(output_path)
     fig.tight_layout()
