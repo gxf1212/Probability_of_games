@@ -204,36 +204,37 @@ def plot_multiplicity_distribution(stats: MultiplicityStats, output_path: Path) 
 
 def plot_type_count_curves(stats: MultiplicityStats, output_path: Path) -> None:
     counts = sorted({k for dist in stats.per_type_distribution.values() for k in dist.keys()})
-    x = np.arange(len(counts))
-    n_types = len(EGG_TYPES)
-    width = 0.8 / n_types if n_types else 0.5
-    offsets = (np.arange(n_types) - (n_types - 1) / 2) * width
+    labels = [CHINESE_LABELS.get(egg.key, egg.label) for egg in EGG_TYPES]
+    data = np.array(
+        [[stats.per_type_distribution[egg.key].get(count, 0.0) for count in counts] for egg in EGG_TYPES]
+    )
 
     fig, ax = plt.subplots(figsize=(9, 5), dpi=FIGURE_DPI)
-    for idx, egg in enumerate(EGG_TYPES):
-        dist = stats.per_type_distribution[egg.key]
-        values = [dist.get(count, 0.0) for count in counts]
-        bars = ax.bar(x + offsets[idx], values, width, label=CHINESE_LABELS.get(egg.key, egg.label))
-        for bar, val in zip(bars, values):
-            if val <= 0:
-                continue
+    cmap = plt.cm.Blues
+    im = ax.imshow(data, cmap=cmap)
+
+    ax.set_xticks(np.arange(len(counts)))
+    ax.set_xticklabels(counts)
+    ax.set_yticks(np.arange(len(labels)))
+    ax.set_yticklabels(labels)
+    ax.set_xlabel("可同时凑出的数量")
+    ax.set_ylabel("蛋型")
+    ax.set_title("各蛋型最大蛋数量热图")
+
+    for i in range(data.shape[0]):
+        for j in range(data.shape[1]):
+            value = data[i, j]
             ax.text(
-                bar.get_x() + bar.get_width() / 2,
-                bar.get_height() + 0.002,
-                f"{val*100:.1f}%",
+                j,
+                i,
+                f"{value*100:.2f}%",
                 ha="center",
-                va="bottom",
+                va="center",
+                color="#1f1f1f" if value < 0.5 else "white",
                 fontsize=11,
             )
 
-    ax.set_xlabel("该蛋型可同时凑出的数量")
-    ax.set_ylabel("概率 (%)")
-    ax.set_title("各蛋型可叠数量分布")
-    ax.set_xticks(x)
-    ax.set_xticklabels(counts)
-    ax.yaxis.set_major_formatter(lambda val, _: f"{val*100:.1f}%")
-    ax.set_ylim(0, max(max(dist.values()) for dist in stats.per_type_distribution.values()) * 1.2)
-    ax.legend(ncol=2)
+    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label="概率")
 
     _ensure_parent(output_path)
     fig.tight_layout()
