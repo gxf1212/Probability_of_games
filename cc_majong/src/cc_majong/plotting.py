@@ -267,8 +267,8 @@ def plot_combo_waits(combo_stats: Dict[str, Dict[str, float]], output_path: Path
     width = 0.35
 
     fig, ax = plt.subplots(figsize=(9, 5), dpi=FIGURE_DPI)
-    ax.bar(x - width / 2, theory, width, color="#8ecae6", label="理论命中")
-    ax.bar(x + width / 2, empirical, width, color="#ffb703", label="实测命中")
+    ax.bar(x - width / 2, theory, width, color="#8ecae6", label="理论")
+    ax.bar(x + width / 2, empirical, width, color="#ffb703", label="实测")
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
     ax.set_ylabel("下一摸命中率 (%)")
